@@ -4,105 +4,79 @@
 
 > **"Every price chart you've ever seen shows you what happened. MarketWhisper shows you what the market was feeling at every moment."**
 
-MarketWhisper is a state-of-the-art, multi-model market edge detection and probabilistic execution system (code-named **PANTHEON-WHISPER**). It is designed to reconstruct the emotional narrative hidden inside order flow, volume patterns, and price microstructure, and render it as a living, breathing visual story in real-time. 
+Welcome to **MarketWhisper** (Project PANTHEON-WHISPER) — a state-of-the-art, multi-model market edge detection and probabilistic execution system. This project does not rely on lagging indicators like RSI or MACD. Instead, it reconstructs the emotional narrative hidden inside order flow, volume patterns, and price microstructure, rendering it as a living, breathing visual story in real-time right in your browser.
 
-Not indicators. Not RSI. Not MACD. Something completely different.
+This is not just a dashboard; it is a **Market Consciousness Visualizer**.
+
+---
+
+## ⚡ The Split Deployment Architecture (Netlify + Render)
+
+To achieve maximum performance and zero-cost hosting, MarketWhisper utilizes a highly optimized **Split Deployment Architecture**. 
+
+1. **The Brain (Render Backend):** A continuous FastAPI server that runs the heavy Python Machine Learning models (`hmmlearn`, `scikit-learn`) and computes the mathematics in the background. It holds a persistent WebSocket connection open.
+2. **The Eyes (Netlify Frontend):** A blazing-fast, serverless HTML5/Canvas UI hosted on Netlify. It features a custom **"Waking Up The Server"** loading screen that gracefully waits for the Render server to boot from sleep, instantly dropping into the live feed the millisecond a connection is established.
+
+---
 
 ## 🧠 The Magic Mechanism
-Markets leave psychological fingerprints in their data that traditional traders never look at together. MarketWhisper reads these simultaneously to map the market's hidden emotional state.
 
-`Price Velocity + Volume Shape + Time-of-Day Rhythm + Spread Compression + Candle Body Ratios + Institutional Footprint = The Hidden Emotional State`
+Markets leave psychological fingerprints in their data. The algorithm extracts 5 core microstructure signals and feeds them into a **Hidden Markov Model (HMM)** to output one of 7 discrete market states (e.g., *🌊 Drift, 🐋 Accumulation, 💥 Panic*).
 
-The algorithm extracts these core microstructure signals and feeds them into a **Hidden Markov Model (HMM)** to output one of 7 discrete market states (e.g., *🌊 Drift, 🐋 Accumulation, 💥 Panic*), which then drives the visual dashboard.
+`Price Velocity + Volume Shape + Time-of-Day Rhythm + Spread Compression + Candle Body Ratios = The Hidden Emotional State`
 
----
-
-## 🖥️ The Interface (The 3 Panels)
-
-### Panel 1: The Pulse
-A real-time organic waveform that physically changes shape based on market stress. 
-- **Calm market (Drift):** Slow, smooth blue sine wave. 
-- **Panic/Stops run:** Sharp, jagged red spikes. 
-- **Accumulation:** Deep, slow purple pulse.
-*You glance at it and instantly know what's happening without reading a single number.*
-
-### Panel 2: The Memory Wall
-A scrolling heatmap showing the historical progression of market "emotional states" as color blocks. It allows you to see exactly when the market transitioned from confusion → conviction → exhaustion → reversal. Like reading a mood history.
-
-### Panel 3: The Whisper Feed
-A live text feed that narrates what the market is doing in plain English, written in the style of a seasoned old-school tape reader's inner monologue:
-> *09:47 — "Smart money quietly accumulating. Retail still selling. This divergence won't last long."*
-
-This is algorithmically generated logic acting like pure intuition.
+### 🖥️ The 3 Interface Panels
+* **Panel 1 — The Pulse:** A 60FPS real-time organic waveform that physically changes shape based on market stress. Calm = smooth sine wave. Panic = sharp jagged spikes. 
+* **Panel 2 — The Memory Wall:** A scrolling heatmap showing the historical progression of market states. You see exactly when confusion turned into conviction.
+* **Panel 3 — The Whisper Feed:** Algorithmically generated logic acting like pure intuition. It narrates the market in plain English, written in the style of an old-school tape reader's inner monologue.
 
 ---
 
-## ⚙️ Project Architecture
+## 🚀 The Ultimate Deployment Guide
 
-```text
-marketwhisper/
-├── core/
-│   ├── signal_extractor.py  # Computes the 5 raw emotional signals
-│   ├── hmm_classifier.py    # Hidden Markov State detection (7 states)
-│   └── narrator.py          # Algorithmic whisper feed generator
-├── ui/
-│   ├── pulse_widget.py      # pyqtgraph animated waveform
-│   ├── memory_wall.py       # Scrolling heatmap
-│   ├── whisper_feed.py      # Live tape narration
-│   └── main_window.py       # PyQt6 Layout
-└── main.py                  # Simulation Engine & App Entry Point
-```
+Deploying MarketWhisper to the world is incredibly easy. You will host the Backend on Render and the Frontend on Netlify. 
 
-### The 5 Signals
-1. **Velocity Score:** Rate of price change vs. average volatility.
-2. **Volume Shape Index:** Correlation of volume surges with price direction.
-3. **Spread Memory:** Compression vs. Expansion of the Bid/Ask spread proxy.
-4. **Candle Body Ratio:** Conviction vs. Rejection based on body-to-wick distribution.
-5. **Time Gravity:** Market behavior weights based on time-of-day.
+### Step 1: Deploy the Brain to Render
+1. Go to **[Render.com](https://dashboard.render.com/)** and log in with GitHub.
+2. Click **New +** -> **Blueprint**.
+3. Connect your GitHub repository. Render will automatically detect the `render.yaml` file and deploy the Python backend for you.
+4. Once it is live, **copy your new Render URL** (it will look like `market-whisper-xyz.onrender.com`).
 
----
-
-## 🚀 Installation & Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/MarketWhisper.git
-   cd MarketWhisper
+### Step 2: Link the Frontend to the Brain
+1. In your code editor, open `frontend/app.js`.
+2. At the very top (Line 46), find the `RENDER_BACKEND_URL` variable.
+3. Paste your Render URL into the string, making sure to use `wss://` and append `/ws` at the end.
+   ```javascript
+   const RENDER_BACKEND_URL = "wss://market-whisper-xyz.onrender.com/ws"; 
    ```
+4. Commit and push this single change to your GitHub repository.
 
-2. **Set up a Virtual Environment (Recommended):**
-   ```bash
-   python -m venv venv
-   # Windows:
-   .\venv\Scripts\activate
-   # Mac/Linux:
-   source venv/bin/activate
-   ```
+### Step 3: Deploy the Dashboard to Netlify
+1. Go to **[Netlify.com](https://www.netlify.com/)** and click **Add new site** -> **Import an existing project**.
+2. Connect your GitHub repository.
+3. In the "Build settings", set the **Publish directory** to: `frontend`
+4. Leave the Build command completely empty.
+5. Hit **Deploy Site**.
 
-3. **Install Dependencies:**
-   ```bash
-   pip install --upgrade pip setuptools wheel
-   pip install numpy pandas hmmlearn scikit-learn scipy statsmodels PyQt6 pyqtgraph yfinance
-   ```
+**You are done!** 🎉 When users visit your Netlify link, they will see the glowing loading screen while the Render server wakes up. As soon as it connects, the Market's Subconscious comes alive on their screen.
 
 ---
 
-## 🎮 Usage
-
-Run the application with the built-in random-walk live market simulator:
-
+## 💻 Running Locally
+If you want to run the entire stack locally on your machine:
 ```bash
-python main.py
+# 1. Activate your virtual environment
+python -m venv venv
+.\venv\Scripts\activate  # Windows
+source venv/bin/activate  # Mac/Linux
+
+# 2. Install Dependencies
+pip install -r requirements.txt
+
+# 3. Start the Server
+uvicorn app:app --reload
 ```
-*Note: The simulator generates realistic OHLCV price action every 2 seconds to feed the Hidden Markov Model and drive the visualization.*
-
----
-
-## 🔮 Future Roadmap (The Pantheon Integration)
-- [ ] Connect live `yfinance` or `alpaca-trade-api` order book feeds.
-- [ ] Implement walk-forward optimization for the HMM parameters.
-- [ ] Multi-timeframe regime detection via LSTMs.
-- [ ] Strategy Execution Layer: Position sizing using Fractional Kelly Criterion based on HMM state confidence.
+Then simply open `http://127.0.0.1:8000` in your web browser!
 
 ---
 *Built for those who don't just want to predict the market, but want to feel its pulse.*
