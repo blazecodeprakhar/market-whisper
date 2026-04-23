@@ -1,0 +1,11 @@
+yfinance
+pandas
+numpy
+hmmlearn
+scikit-learn
+xgboost
+scipy
+statsmodels
+PyQt6
+pyqtgraph
+alpaca-trade-api
