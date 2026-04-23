@@ -1,6 +1,6 @@
 # 🕯️ MarketWhisper: The Market's Subconscious, Made Visible
 
-![MarketWhisper Interface](screenshot.png)
+![MarketWhisper Interface](image.png)
 
 > **"Every price chart you've ever seen shows you what happened. MarketWhisper shows you what the market was feeling at every moment."**
 
