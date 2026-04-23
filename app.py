@@ -12,7 +12,7 @@ from core.narrator import Narrator
 app = FastAPI()
 
 # Serve static files (HTML, CSS, JS)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
 
 # Core Engine Components
 extractor = SignalExtractor(rolling_window=5)
@@ -41,7 +41,7 @@ def generate_simulated_candle():
 
 @app.get("/")
 async def read_index():
-    return FileResponse("static/index.html")
+    return FileResponse("frontend/index.html")
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):

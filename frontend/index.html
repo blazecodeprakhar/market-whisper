@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarketWhisper - The Market's Subconscious</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -29,9 +29,17 @@
         </div>
     </div>
     
+    <!-- Loading Screen Overlay -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loader"></div>
+        <h2 id="loading-text">WAKING UP THE SERVER...</h2>
+        <p>Connecting to the Pantheon-Whisper Backend</p>
+        <p class="small-text">(Render free tiers spin down after 15 mins. Please wait a moment.)</p>
+    </div>
+
     <!-- Render specific start command instruction for users -->
     <div class="deployment-info">Live WebSocket Connection Established.</div>
 
-    <script src="/static/app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

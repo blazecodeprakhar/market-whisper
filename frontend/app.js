@@ -39,6 +39,14 @@ function hexToRgb(hex) {
     return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null;
 }
 
+// ============================================
+// CONFIGURATION
+// Change this to your Render App URL when deploying to Netlify
+// e.g., "wss://market-whisper.onrender.com/ws"
+// Leave empty to auto-detect (useful for local testing)
+const RENDER_BACKEND_URL = ""; 
+// ============================================
+
 // Memory Wall Array
 const MAX_HISTORY = 60;
 const historyBlocks = [];
@@ -53,13 +61,25 @@ for(let i=0; i<MAX_HISTORY; i++) {
 }
 
 // WebSocket Connection
-const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-const wsUrl = `${protocol}//${window.location.host}/ws`;
+let wsUrl;
+if (RENDER_BACKEND_URL !== "") {
+    wsUrl = RENDER_BACKEND_URL;
+} else {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    wsUrl = `${protocol}//${window.location.host}/ws`;
+}
+
 let ws;
+const loadingScreen = document.getElementById('loading-screen');
 
 function connect() {
     ws = new WebSocket(wsUrl);
     
+    ws.onopen = () => {
+        // Hide loading screen when connected
+        loadingScreen.classList.add('hidden');
+    };
+
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
         
