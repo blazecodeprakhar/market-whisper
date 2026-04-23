@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketWhisper - The Market's Subconscious</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Panel 1: The Pulse -->
+        <div class="panel pulse-panel">
+            <div class="panel-header">PANEL 1 — THE PULSE (Current State)</div>
+            <div class="state-label" id="state-label">Waiting for signal...</div>
+            <canvas id="pulseCanvas"></canvas>
+        </div>
+
+        <!-- Panel 2: The Memory Wall -->
+        <div class="panel wall-panel">
+            <div class="panel-header">PANEL 2 — THE MEMORY WALL (History)</div>
+            <div id="memory-wall" class="memory-wall-container"></div>
+        </div>
+
+        <!-- Panel 3: The Whisper Feed -->
+        <div class="panel feed-panel">
+            <div class="panel-header">PANEL 3 — THE WHISPER FEED (Narrative)</div>
+            <div id="whisper-feed" class="whisper-feed-container"></div>
+        </div>
+    </div>
+    
+    <!-- Render specific start command instruction for users -->
+    <div class="deployment-info">Live WebSocket Connection Established.</div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

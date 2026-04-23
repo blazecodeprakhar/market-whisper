@@ -1,11 +1,10 @@
-yfinance
-pandas
+fastapi==0.109.2
+uvicorn==0.27.1
+websockets==12.0
 numpy
+pandas
 hmmlearn
 scikit-learn
-xgboost
 scipy
 statsmodels
-PyQt6
-pyqtgraph
-alpaca-trade-api
+yfinance
